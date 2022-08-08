@@ -1,0 +1,4 @@
+cfg_file: kwsr.cfg
+keyword_grammar: keywords.json
+sample_rate: 16000
+kws_tool: kwsbp

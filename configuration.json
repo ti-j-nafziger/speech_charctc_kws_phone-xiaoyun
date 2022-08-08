@@ -1,0 +1,10 @@
+{
+  "framework": "kaldi",
+  "task" : "keyword-spotting",
+  "model" : {
+    "type" : "kws-kwsbp"
+  },
+  "pipeline": {
+    "type":"kws-kwsbp"
+  }
+}
