@@ -72,7 +72,7 @@ from modelscope.utils.constant import Tasks
 kwsbp_16k_pipline = pipeline(
     task=Tasks.keyword_spotting,
     model='damo/speech_charctc_kws_phone-xiaoyun')
-kws_result = kwsbp_16k_pipline(audio_in=['data/test/audios/kws_xiaoyunxiaoyun.wav', None])
+kws_result = kwsbp_16k_pipline(audio_in='data/test/audios/kws_xiaoyunxiaoyun.wav')
 ```
 
 ### 模型局限性以及可能的偏差
