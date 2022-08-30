@@ -2,7 +2,7 @@
 tasks:
 - keyword-spotting
 domain:
-- speech
+- audio
 frameworks:
 - kaldi
 backbone:
@@ -73,6 +73,7 @@ kwsbp_16k_pipline = pipeline(
     task=Tasks.keyword_spotting,
     model='damo/speech_charctc_kws_phone-xiaoyun')
 kws_result = kwsbp_16k_pipline(audio_in='data/test/audios/kws_xiaoyunxiaoyun.wav')
+print(kws_result)
 ```
 
 ### 模型局限性以及可能的偏差
