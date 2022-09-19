@@ -25,12 +25,19 @@ widgets:
       - type: audio 
         name: input 
         title: 音频 
+    parameters:
+      - type: string
+        name: keywords
+        title: 唤醒词
     examples:
       - name: 1
         title: 示例1 
         inputs:
           - name: input
             data: git://example/kws_xiaoyunxiaoyun.wav
+        parameters:
+          - name: keywords
+            value: 小云小云
     inferencespec:
       cpu: 1 #CPU数量
       memory: 1024 
