@@ -48,8 +48,11 @@ widgets:
 
 ## 模型描述
 
-移动端语音唤醒模型，检测关键词为“小云小云”。模型主体为4层FSMN结构，使用CTC训练准则，参数量750K，适用于移动端设备运行。模型输入为Fbank特征，输出为基于char建模的中文全集token预测，测试工具根据每一帧的预测数据进行后处理得到输入音频的实时检测结果。模型训练采用“basetrain + finetune”的模式，basetrain过程使用大量内部移动端数据，在此基础上，使用1万条设备端录制安静场景“小云小云”数据进行微调，得到最终面向业务的模型。后续用户可在basetrain模型基础上，使用其他关键词数据进行微调，得到新的语音唤醒模型，但暂时未开放模型finetune功能。
-
+移动端语音唤醒模型，检测关键词为“小云小云”。
+模型输入为Fbank特征，输出为基于char建模的中文全集token预测，测试工具根据每一帧的预测数据进行后处理得到输入音频的实时检测结果。
+模型主体为4层FSMN结构，参数量750K，使用CTC训练准则，适用于移动端设备运行。
+模型训练采用“basetrain + finetune”的模式，basetrain过程使用大量内部移动端数据，在此基础上，使用1万条设备端录制安静场景“小云小云”数据进行微调，得到最终面向业务的模型。后续将支持用户可在basetrain模型基础上，使用其他关键词数据进行微调，得到新的语音唤醒模型。  
+![cFSMN网络框图](fig/Illustration_of_cFSMN.png)
 
 ## 使用方式和范围
 
@@ -107,3 +110,13 @@ print(kws_result)
 
 - 模型在自建9个场景各50句的正样本集（共450条）测试，唤醒率为93.11%。在自建40小时的负样本集测试，误唤醒率为0%
 
+## 相关论文以及引用信息
+
+@inproceedings{chen18c_interspeech,
+  author={Mengzhe Chen and ShiLiang Zhang and Ming Lei and Yong Liu and Haitao Yao and Jie Gao},
+  title={{Compact Feedforward Sequential Memory Networks for Small-footprint Keyword Spotting}},
+  year=2018,
+  booktitle={Proc. Interspeech 2018},
+  pages={2663--2667},
+  doi={10.21437/Interspeech.2018-1204}
+}
