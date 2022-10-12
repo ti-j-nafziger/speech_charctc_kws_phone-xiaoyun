@@ -48,14 +48,12 @@ widgets:
 
 ## 模型描述
 
-移动端语音唤醒模型，检测关键词为“小云小云”。
-模型网络结构继承自[论文](https://www.isca-speech.org/archive/interspeech_2018/chen18c_interspeech.html)《Compact Feedforward Sequential Memory Networks for Small-footprint
+  移动端语音唤醒模型，检测关键词为“小云小云”。  
+  模型网络结构继承自[论文](https://www.isca-speech.org/archive/interspeech_2018/chen18c_interspeech.html)《Compact Feedforward Sequential Memory Networks for Small-footprint
 Keyword Spotting》，其主体为4层cFSMN结构(如下图所示)，参数量约750K，适用于移动端设备运行。  
-模型输入采用Fbank特征，训练阶段使用CTC-loss计算损失并更新参数，输出为基于char建模的中文全集token预测，token数共2599个。  
-测试工具根据每一帧的预测数据进行后处理得到输入音频的实时检测结果。  
-模型训练采用"basetrain + finetune"的模式，basetrain过程使用大量内部移动端数据，在此基础上，使用1万条设备端录制安静场景“小云小云”数据进行微调，得到最终面向业务的模型。  
-由于采用了中文char全量token建模，并使用充分数据进行basetrain，本模型支持基本的唤醒词/命令词自定义功能，但具体性能无法评估。  
-后续将支持用户在basetrain模型基础上，使用其他关键词数据进行微调，得到新的语音唤醒模型。  
+  模型输入采用Fbank特征，训练阶段使用CTC-loss计算损失并更新参数，输出为基于char建模的中文全集token预测，token数共2599个。测试工具根据每一帧的预测数据进行后处理得到输入音频的实时检测结果。  
+  模型训练采用"basetrain + finetune"的模式，basetrain过程使用大量内部移动端数据，在此基础上，使用1万条设备端录制安静场景“小云小云”数据进行微调，得到最终面向业务的模型。由于采用了中文char全量token建模，并使用充分数据进行basetrain，本模型支持基本的唤醒词/命令词自定义功能，但具体性能无法评估。  
+  后续将支持用户在basetrain模型基础上，使用其他关键词数据进行微调，得到新的语音唤醒模型。  
 ![cFSMN网络框图](fig/Illustration_of_cFSMN.png)
 
 ## 使用方式和范围
