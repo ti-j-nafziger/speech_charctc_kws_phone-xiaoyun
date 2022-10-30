@@ -84,7 +84,7 @@ from modelscope.utils.constant import Tasks
 kwsbp_16k_pipline = pipeline(
     task=Tasks.keyword_spotting,
     model='damo/speech_charctc_kws_phone-xiaoyun')
-kws_result = kwsbp_16k_pipline(audio_in='https://modelscope.oss-cn-beijing.aliyuncs.com/test/audios/kws_xiaoyunxiaoyun.wav')
+kws_result = kwsbp_16k_pipline(audio_in='https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/KWS/pos_testset/kws_xiaoyunxiaoyun.wav')
 print(kws_result)
 ```
 
