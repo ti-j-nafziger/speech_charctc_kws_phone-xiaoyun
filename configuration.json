@@ -1,10 +1,110 @@
 {
-  "framework": "kaldi",
-  "task" : "keyword-spotting",
-  "model" : {
-    "type" : "kws-kwsbp"
-  },
+  "framework": "pytorch",
+  "task": "keyword-spotting",
   "pipeline": {
-    "type":"kws-kwsbp"
+    "type": "kws-kwsbp"
+  },
+  "model": {
+    "type": "speech_kws_fsmn_char_ctc_nearfield",
+    "input_dim": 400,
+    "backbone": {
+      "type": "fsmn",
+      "input_affine_dim": 140,
+      "num_layers": 4,
+      "linear_dim": 250,
+      "proj_dim": 128,
+      "left_order": 10,
+      "right_order": 2,
+      "left_stride": 1,
+      "right_stride": 1,
+      "output_affine_dim": 140
+    },
+    "output_dim": 2599
+  },
+  "preprocessor": {
+    "filter_conf": {
+      "max_length": 1500,
+      "min_length": 10
+    },
+    "feature_extraction_conf": {
+      "feature_type": "fbank",
+      "num_mel_bins": 80,
+      "frame_shift": 10,
+      "frame_length": 25,
+      "dither": 1.0
+    },
+    "spec_aug": true,
+    "spec_aug_conf": {
+      "num_t_mask": 2,
+      "num_f_mask": 2,
+      "max_t": 50,
+      "max_f": 30
+    },
+    "shuffle": true,
+    "shuffle_conf": {
+      "shuffle_size": 1500
+    },
+    "context_expansion": true,
+    "context_expansion_conf": {
+      "left": 2,
+      "right": 2
+    },
+    "frame_skip": 3,
+    "batch_conf": {
+      "batch_size": 256
+    }
+  },
+  "dataset": {
+    "train": {
+      "name": "kws_xiaoyunxiaoyun",
+      "split": "train"
+    },
+    "val": {
+      "name": "kws_xiaoyunxiaoyun",
+      "split": "val"
+    }
+  },
+  "train": {
+    "max_epochs": 10,
+    "dataloader": {
+      "batch_size_per_gpu": 256,
+      "workers_per_gpu": 8,
+      "prefetch": 2
+    },
+    "optimizer": {
+      "type": "Adam",
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "grad_clip": 5.0
+    },
+    "lr_scheduler": {
+      "type": "ReduceLROnPlateau",
+      "mode": "min",
+      "factor": 0.5,
+      "patience": 3,
+      "min_lr": 1e-6,
+      "threshold": 0.01,
+      "verbose": true
+    },
+    "lr_scheduler_hook": {
+      "type": "PlateauLrSchedulerHook",
+      "metric_key": "avg_loss"
+    },
+    "hooks": [
+      {
+        "type": "EvaluationHook",
+        "interval": 1
+      }
+    ]
+  },
+  "evaluation": {
+    "dataloader": {
+      "batch_size_per_gpu": 256,
+      "workers_per_gpu": 8,
+      "prefetch": 2
+    },
+    "metrics": [
+      "audio-noise-metric"
+    ]
   }
 }
