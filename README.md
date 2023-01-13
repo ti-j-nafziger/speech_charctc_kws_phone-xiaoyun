@@ -12,7 +12,8 @@ metrics:
 license: Apache License 2.0
 tags:
 - Alibaba
-- kws
+- KWS
+- FSMN
 - CTC
 - Mind Speech KWS
 datasets:
