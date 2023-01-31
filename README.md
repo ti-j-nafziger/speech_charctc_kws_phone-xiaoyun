@@ -29,7 +29,7 @@ widgets:
     parameters:
       - type: string
         name: keywords
-        title: 唤醒词
+        title: 自定义唤醒词
     examples:
       - name: 1
         title: 示例1 
