@@ -104,7 +104,7 @@ audio_in参数说明：
   在modelscope-1.2.0及以上版本，我们上线了近场语音唤醒训练功能，并在小云模型库中放置训练所需资源和配置，以及一个迭代好的基线模型。开发者用户可以在此基础上，根据项目需求采集数据以定制自己的唤醒模型，所需训练数据量极少，训练门槛极低。  
 
 环境部署：
-- 首先根据文档[环境安装](https://modelscope.cn/docs/%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85)新建conda环境并安装Python、深度学习框架以及modelscop语音领域依赖包：
+- 首先根据文档[环境安装](https://modelscope.cn/docs/%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85)新建conda环境并安装Python、深度学习框架以及modelscope语音领域依赖包：
 ```sh
 $ conda create -n modelscope python=3.7
 $ conda activate modelscope
