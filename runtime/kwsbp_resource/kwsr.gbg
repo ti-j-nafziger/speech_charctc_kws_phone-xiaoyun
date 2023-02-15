@@ -1,0 +1,5 @@
+{
+ "word_list":[
+	{"name":"SIL", "lm_boost":0.0, "am_boost":-0.0}
+	]
+}
