@@ -103,34 +103,30 @@ audio_in参数说明：
 #### 模型训练代码范例：
 <p style="text-indent:2em">在modelscope-1.2.0及以上版本，我们上线了近场语音唤醒训练功能，并在小云模型库中放置训练所需资源和配置，以及一个迭代好的基线模型。开发者用户可以在此基础上，根据项目需求采集数据以定制自己的唤醒模型，所需训练数据量极少，训练门槛极低。  </p>
 
-<p style="text-indent:2em">环境部署：</p>
+环境部署：
 - 首先根据文档[环境安装](https://modelscope.cn/docs/%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85)新建conda环境并安装Python、深度学习框架以及modelscope语音领域依赖包：
 ```sh
 $ conda create -n modelscope python=3.7
 $ conda activate modelscope
 $ pip install torch torchvision torchaudio
 $ pip install "modelscope[audio]" -f https://modelscope.oss-cn-beijing.aliyuncs.com/releases/repo.html
-```
-
-- 然后安装近场唤醒训练需要的tensorboardX包：
-```sh
 $ pip install tensorboardX
 ```
 
-<p style="text-indent:2em">训练流程：</p>
+训练流程：
 - s1: 手动创建一个本地工作目录，然后配置到work_dir，用于保存所有训练过程产生的文件
 - s2: 获取小云模型库中的配置文件，包含训练参数信息，模型ID确保为'damo/speech_charctc_kws_phone-xiaoyun'
 - s3: 配置准备好的训练数据列表(kaldi风格)，音频列表分为train/cv，标注合为一个文件；然后初始化一个近场唤醒训练器，trainer tag为'speech_kws_fsmn_char_ctc_nearfield'
 - s4: 启动训练。
 - s5: 配置唤醒词，多个请使用英文‘,’分隔；配置测试目录和测试数据列表(kaldi风格)，然后启动测试，最终在测试目录生成测试结果文件——score.txt
 
-<p style="text-indent:2em">训练代码保存文件，如example_kws.py，通过命令行启动训练：</p>
+训练代码保存文件，如example_kws.py，通过命令行启动训练：
 
 ```sh
 $ PYTHONPATH=. torchrun --standalone --nnodes=1 --nproc_per_node=2 example_kws.py
 ```
 
-<p style="text-indent:2em">以下是一些训练参考代码：</p>
+以下是一些训练参考代码：
 
 ```python
 # coding = utf-8
@@ -191,7 +187,7 @@ if __name__ == '__main__':
     main()
 ```
 
-<p style="text-indent:2em">补充说明：</p>
+补充说明：
 - <font size="2">*kaldi列表风格如下所示：*</font>
    - <font size="2">*音频列表为“索引+路径”，中间以Tab分隔。*</font>
    - <font size="2">*标注列表为“索引+标注”，中间以Tab分隔，标注是否分词均可。*</font>
