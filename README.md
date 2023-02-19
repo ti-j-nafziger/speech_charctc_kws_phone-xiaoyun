@@ -47,15 +47,13 @@ widgets:
 
 # 语音唤醒模型介绍
 
-
 ## 模型描述
 
-<p style="text-indent:2em">移动端语音唤醒模型，检测关键词为“小云小云”。  </p>
-<p style="text-indent:2em">模型网络结构继承自[论文](https://www.isca-speech.org/archive/interspeech_2018/chen18c_interspeech.html)《Compact Feedforward Sequential Memory Networks for Small-footprint
-Keyword Spotting》，其主体为4层cFSMN结构(如下图所示)，参数量约750K，适用于移动端设备运行。  </p>
-<p style="text-indent:2em">模型输入采用Fbank特征，训练阶段使用CTC-loss计算损失并更新参数，输出为基于char建模的中文全集token预测，token数共2599个。测试工具根据每一帧的预测数据进行后处理得到输入音频的实时检测结果。  </p>
-<p style="text-indent:2em">模型训练采用"basetrain + finetune"的模式，basetrain过程使用大量内部移动端数据，在此基础上，使用1万条设备端录制安静场景“小云小云”数据进行微调，得到最终面向业务的模型。由于采用了中文char全量token建模，并使用充分数据进行basetrain，本模型支持基本的唤醒词/命令词自定义功能，但具体性能无法评估。如用户想验证更多命令词，可以通过页面右侧“在线体验”板块自定义设置并录音测试。  </p>
-<p style="text-indent:2em">目前最新ModelScope版本已支持用户在basetrain模型基础上，使用其他关键词数据进行微调，得到新的语音唤醒模型。  </p>
+&emsp;&emsp;移动端语音唤醒模型，检测关键词为“小云小云”。  
+&emsp;&emsp;模型网络结构继承自[论文](https://www.isca-speech.org/archive/interspeech_2018/chen18c_interspeech.html)《Compact Feedforward Sequential Memory Networks for Small-footprint Keyword Spotting》，其主体为4层cFSMN结构(如下图所示)，参数量约750K，适用于移动端设备运行。  
+&emsp;&emsp;模型输入采用Fbank特征，训练阶段使用CTC-loss计算损失并更新参数，输出为基于char建模的中文全集token预测，token数共2599个。测试工具根据每一帧的预测数据进行后处理得到输入音频的实时检测结果。  
+&emsp;&emsp;模型训练采用"basetrain + finetune"的模式，basetrain过程使用大量内部移动端数据，在此基础上，使用1万条设备端录制安静场景“小云小云”数据进行微调，得到最终面向业务的模型。由于采用了中文char全量token建模，并使用充分数据进行basetrain，本模型支持基本的唤醒词/命令词自定义功能，但具体性能无法评估。如用户想验证更多命令词，可以通过页面右侧“在线体验”板块自定义设置并录音测试。  
+&emsp;&emsp;目前最新ModelScope版本已支持用户在basetrain模型基础上，使用其他关键词数据进行微调，得到新的语音唤醒模型。  
 
 <p align="center">
 <img src="fig/Illustration_of_cFSMN.png" alt="cFSMN网络框图" width="400" />
@@ -63,7 +61,7 @@ Keyword Spotting》，其主体为4层cFSMN结构(如下图所示)，参数量�
 
 ## 使用方式和范围
 
-运行范围：
+运行范围：  
 - 现阶段只能在Linux-x86_64运行，不支持Mac和Windows。
 - 模型训练需要用户服务器配置GPU卡，CPU训练暂不支持。
 
@@ -75,7 +73,6 @@ Keyword Spotting》，其主体为4层cFSMN结构(如下图所示)，参数量�
 
 目标场景:
 - 移动端APP用到的关键词检测场景。
-
 
 ### 如何使用
 
@@ -101,10 +98,12 @@ audio_in参数说明：
 - 同时设置本地正/负样本目录，如audio_in=['POS_DIR', 'NEG_DIR']，函数返回Det测试结果，用户可保存JSON格式文本方便选取合适工作点。
 
 #### 模型训练代码范例：
-<p style="text-indent:2em">在modelscope-1.2.0及以上版本，我们上线了近场语音唤醒训练功能，并在小云模型库中放置训练所需资源和配置，以及一个迭代好的基线模型。开发者用户可以在此基础上，根据项目需求采集数据以定制自己的唤醒模型，所需训练数据量极少，训练门槛极低。  </p>
+
+&emsp;&emsp;在modelscope-1.2.0及以上版本，我们上线了近场语音唤醒训练功能，并在小云模型库中放置训练所需资源和配置，以及一个迭代好的基线模型。开发者用户可以在此基础上，根据项目需求采集数据以定制自己的唤醒模型，所需训练数据量极少，训练门槛极低。  
 
 环境部署：
-- 首先根据文档[环境安装](https://modelscope.cn/docs/%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85)新建conda环境并安装Python、深度学习框架以及modelscope语音领域依赖包：
+- 首先根据文档[环境安装](https://modelscope.cn/docs/%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85)新建conda环境并安装Python、深度学习框架以及modelscope语音领域依赖包：  
+
 ```sh
 $ conda create -n modelscope python=3.7
 $ conda activate modelscope
@@ -120,13 +119,13 @@ $ pip install tensorboardX
 - s4: 启动训练。
 - s5: 配置唤醒词，多个请使用英文‘,’分隔；配置测试目录和测试数据列表(kaldi风格)，然后启动测试，最终在测试目录生成测试结果文件——score.txt
 
-训练代码保存文件，如example_kws.py，通过命令行启动训练：
+&emsp;&emsp;训练代码保存文件，如example_kws.py，通过命令行启动训练：  
 
 ```sh
 $ PYTHONPATH=. torchrun --standalone --nnodes=1 --nproc_per_node=2 example_kws.py
 ```
 
-以下是一些训练参考代码：
+&emsp;&emsp;以下是一些训练参考代码：  
 
 ```python
 # coding = utf-8
@@ -187,7 +186,7 @@ if __name__ == '__main__':
     main()
 ```
 
-补充说明：
+&emsp;&emsp;补充说明：  
 - <font size="2">*kaldi列表风格如下所示：*</font>
    - <font size="2">*音频列表为“索引+路径”，中间以Tab分隔。*</font>
    - <font size="2">*标注列表为“索引+标注”，中间以Tab分隔，标注是否分词均可。*</font>
@@ -246,7 +245,6 @@ training_xiaoyunxiaoyun
 ### 模型局限性以及可能的偏差
 
 - 考虑到正负样本测试集覆盖场景不够全面，可能有特定场合/特定人群唤醒率偏低或误唤醒偏高问题。
-
 
 ## 训练数据介绍
 
