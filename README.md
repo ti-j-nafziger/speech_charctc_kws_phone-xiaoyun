@@ -115,8 +115,8 @@ $ pip install tensorboardX
 训练流程：
 - s1: 手动创建一个本地工作目录，然后配置到work_dir，用于保存所有训练过程产生的文件
 - s2: 获取小云模型库中的配置文件，包含训练参数信息，模型ID确保为'damo/speech_charctc_kws_phone-xiaoyun'
-- s3: 配置准备好的训练数据列表(kaldi风格)，音频列表分为train/cv，标注合为一个文件；然后初始化一个近场唤醒训练器，trainer tag为'speech_kws_fsmn_char_ctc_nearfield'
-- s4: 启动训练。
+- s3: 初始化一个近场唤醒训练器，trainer tag为'speech_kws_fsmn_char_ctc_nearfield'
+- s4: 配置准备好的训练数据列表(kaldi风格)，音频列表分为train/cv，标注合为一个文件，然后启动训练。
 - s5: 配置唤醒词，多个请使用英文‘,’分隔；配置测试目录和测试数据列表(kaldi风格)，然后启动测试，最终在测试目录生成测试结果文件——score.txt
 
 &emsp;&emsp;训练代码保存文件，如example_kws.py，通过命令行启动训练：  
@@ -148,22 +148,24 @@ def main():
     configs.dump(config_file)
 
     # s3
-    train_scp = './example_kws/train_wav.scp'
-    cv_scp = './example_kws/cv_wav.scp'
-    trans_file = './example_kws/merge_trans.txt'
     kwargs = dict(
         model=model_id,
         work_dir=work_dir,
         cfg_file=config_file,
-        train_data=train_scp,
-        cv_data=cv_scp,
-        trans_data=trans_file
     )
     trainer = build_trainer(
         Trainers.speech_kws_fsmn_char_ctc_nearfield, default_args=kwargs)
 
     # s4
-    trainer.train()
+    train_scp = './example_kws/train_wav.scp'
+    cv_scp = './example_kws/cv_wav.scp'
+    trans_file = './example_kws/merge_trans.txt'
+    kwargs = dict(
+        train_data=train_scp,
+        cv_data=cv_scp,
+        trans_data=trans_file
+    )
+    trainer.train(**kwargs)
 
     # s5
     keywords = '小云小云'
