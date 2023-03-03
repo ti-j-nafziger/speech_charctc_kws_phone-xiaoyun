@@ -9,6 +9,7 @@ backbone:
 - fsmn
 metrics:
 - Recall/FalseAlarm
+finetune-support: True
 license: Apache License 2.0
 tags:
 - Alibaba
