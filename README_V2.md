@@ -49,7 +49,7 @@ widgets:
 # 语音唤醒模型介绍
 
 ## Highlight
-- 本文档适配modelscope-1.3.0至当前最新版本，如您使用较低版本，请阅读README_V1.md。
+- 本文档适配modelscope-1.3.0至1.4.1版本区间，其他版本请阅读对应README。
 
 ## 模型描述
 
