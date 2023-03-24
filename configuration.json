@@ -65,10 +65,10 @@
     }
   },
   "train": {
-    "max_epochs": 10,
+    "max_epochs": 80,
     "dataloader": {
       "batch_size_per_gpu": 256,
-      "workers_per_gpu": 8,
+      "workers_per_gpu": 4,
       "prefetch": 2
     },
     "optimizer": {
@@ -100,7 +100,7 @@
   "evaluation": {
     "dataloader": {
       "batch_size_per_gpu": 256,
-      "workers_per_gpu": 8,
+      "workers_per_gpu": 4,
       "prefetch": 2
     },
     "metrics": [
