@@ -4,7 +4,7 @@ tasks:
 domain:
 - audio
 frameworks:
-- kaldi
+- pytorch
 backbone:
 - fsmn
 metrics:
