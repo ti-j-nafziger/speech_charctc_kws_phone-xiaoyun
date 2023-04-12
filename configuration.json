@@ -75,7 +75,8 @@
       "type": "Adam",
       "lr": 0.001,
       "weight_decay": 0.0001,
-      "grad_clip": 5.0
+      "grad_clip": 5.0,
+      "grad_accum": 1
     },
     "lr_scheduler": {
       "type": "ReduceLROnPlateau",
