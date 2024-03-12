@@ -21,7 +21,7 @@ if [ ! -d $out_dir ]; then
 fi
 
 export PATH=./:$PATH
-export LD_LIBRARY_PATH=./$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=./:$LD_LIBRARY_PATH
 chmod -R 755 ./
 
 # 1. convert to kaldi bin format
