@@ -243,14 +243,14 @@ kws_neg_example2	明天 的 天气 怎么样
 ```
 
 - 训练及测试产生文件如下所示：
-   - 训练每一个epoch保存一次checkpoint及对应训练参数，如0.pt和0.yaml。
-   - 测试之前根据迭代的cv_loss选取最优的5个(可配置)checkpoint平均参数得到目标模型，如avg_5.pt。
-   - 由于我们的唤醒引擎加载kaldi格式文件，所以将目标模型转成了kalid文本格式，如convert.kaldi.txt。
-   - 最终部署还需要使用kaldi nnet-copy文件转成bin文件，并打包运用到SDK。
-    - 模型打包需要Linux环境，参考脚本：${git_path}/runtime/run.sh
-    - 打包过程：1)拷贝训练生成的convert.kaldi.txt到runtime目录；2) 修改${git_path}/runtime/kwsbp_resource/keywords.json，添加对应唤醒词，并根据测试结果配置阈值，填入threshold1字段；3)执行run.sh, 生成目标资源路径为${git_path}/runtime/output/kwsbp_resource_quant16.bin；4)将打包bin文件用于Android/iOS SDK Demo中测试。
-    - 如有移动端唤醒部署需求，欢迎搜索并添加钉钉群进行咨询：21295019391。
-   - 测试结果保存在$test_dir/score.txt文件中，包含了每一条测试音频是否唤醒以及唤醒后的得分等信息，开发者可以根据该文件进一步统计并画出Det曲线。
+    - 训练每一个epoch保存一次checkpoint及对应训练参数，如0.pt和0.yaml。
+    - 测试之前根据迭代的cv_loss选取最优的5个(可配置)checkpoint平均参数得到目标模型，如avg_5.pt。
+    - 由于我们的唤醒引擎加载kaldi格式文件，所以将目标模型转成了kalid文本格式，如convert.kaldi.txt。
+    - 最终部署还需要使用kaldi nnet-copy文件转成bin文件，并打包运用到SDK。
+        - 模型打包需要Linux环境，参考脚本：<GIT_PATH>/runtime/run.sh
+        - 打包过程：1)拷贝训练生成的convert.kaldi.txt到runtime目录；2) 修改<GIT_PATH>/runtime/kwsbp_resource/keywords.json，添加对应唤醒词，并根据测试结果配置阈值，填入threshold1字段；3)执行run.sh, 生成目标资源路径为<GIT_PATH>/runtime/output/kwsbp_resource_quant16.bin；4)将打包bin文件用于Android/iOS SDK Demo中测试。
+       - 如有移动端唤醒部署需求，欢迎搜索并添加钉钉群进行咨询：21295019391。
+    - 测试结果保存在$test_dir/score.txt文件中，包含了每一条测试音频是否唤醒以及唤醒后的得分等信息，开发者可以根据该文件进一步统计并画出Det曲线。
 
 ```sh
 $ tree training_xiaoyunxiaoyun
