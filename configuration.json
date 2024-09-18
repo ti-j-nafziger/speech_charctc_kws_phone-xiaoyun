@@ -21,6 +21,21 @@
     },
     "output_dim": 2599
   },
+  "file_path_metas": {
+    "config":"funasr/inference_fsmn_4e_l10r2_250_128_fdim80_t2599.yaml",
+    "init_param":"funasr/finetune_fsmn_4e_l10r2_250_128_fdim80_t2599_xiaoyun_xiaoyun.pt",
+    "frontend_conf": {
+      "cmvn_file": "funasr/am.mvn.dim80_l2r2"
+    },
+    "tokenizer_conf": {
+      "token_list": "funasr/tokens_2599.txt",
+      "seg_dict": "funasr/lexicon.txt"
+    }
+  },
+  "model_name_in_hub": {
+    "ms": "iic/speech_kws_fsmn_char_ctc_nearfield", 
+    "hf": ""
+  },
   "preprocessor": {
     "filter_conf": {
       "max_length": 1500,
