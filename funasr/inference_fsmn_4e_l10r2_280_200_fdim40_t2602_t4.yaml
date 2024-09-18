@@ -1,0 +1,50 @@
+# parameters for funasr inference
+model: FsmnKWSMT
+model_conf:
+    ctc_weight: 1.0
+
+# encoder related
+encoder: FSMNMT
+encoder_conf:
+    input_dim: 360
+    input_affine_dim: 280
+    fsmn_layers: 4
+    linear_dim: 280
+    proj_dim: 200
+    lorder: 10
+    rorder: 2
+    lstride: 1
+    rstride: 1
+    output_affine_dim: 400
+    output_dim: 2602
+    output_dim2: 4
+    use_softmax: false
+
+frontend: WavFrontend
+frontend_conf:
+    fs: 16000
+    window: hamming
+    n_mels: 40
+    frame_length: 25
+    frame_shift: 10
+    lfr_m: 9
+    lfr_n: 3
+
+tokenizer: CharTokenizer
+tokenizer_conf:
+    unk_symbol: <unk>
+    split_with_space: true
+
+tokenizer2: CharTokenizer
+tokenizer2_conf:
+    unk_symbol: <unk>
+    split_with_space: true
+
+ctc_conf:
+    dropout_rate: 0.0
+    ctc_type: builtin
+    reduce: true
+    ignore_nan_grad: true
+    extra_linear: false
+
+normalize: null
