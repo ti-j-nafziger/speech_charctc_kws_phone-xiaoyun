@@ -80,7 +80,12 @@ widgets:
 
 ### 如何使用
 
-#### 模型推理代码范例：
+#### 环境依赖
+
+funasr>=1.1.7
+
+#### 基于ModelScope推理代码范例
+
 
 ```python
 from modelscope.pipelines import pipeline
@@ -100,6 +105,25 @@ audio_in参数说明：
 - 设置本地正样本目录(自动检索该目录下wav格式音频)，如audio_in=['POS_DIR', None]，函数返回全部正样本测试结果。
 - 设置本地负样本目录(自动检索该目录下wav格式音频)，如audio_in=[None, 'NEG_DIR']，函数返回全部负样本测试结果。
 - 同时设置本地正/负样本目录，如audio_in=['POS_DIR', 'NEG_DIR']，函数返回Det测试结果，用户可保存JSON格式文本方便选取合适工作点。
+
+
+#### 基于FunASR推理代码范例
+
+```python
+from funasr import AutoModel
+
+model = AutoModel(
+    model="iic/speech_charctc_kws_phone-xiaoyun",
+    keywords="小云小云",
+    output_dir="./outputs/debug",
+    device='cpu'
+)
+
+test_wav = "https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/KWS/pos_testset/kws_xiaoyunxiaoyun.wav"
+
+res = model.generate(input=test_wav, cache={},)
+print(res)
+```
 
 #### 模型训练代码范例：
 
