@@ -14,10 +14,8 @@ license: Apache License 2.0
 tags:
 - Alibaba
 - KWS
-- WeKws
 - FSMN
 - CTC
-- Mind Speech KWS
 datasets:
   evaluation:
   - pos_testsets_phone_xiaoyun
@@ -47,9 +45,6 @@ widgets:
 ---
 
 # 语音唤醒模型介绍
-
-## Highlight
-- 本文档适配modelscope-1.5.0至当前最新版本，其他版本请阅读对应README。
 
 ## Git模型下载
 ```
@@ -85,12 +80,7 @@ git clone https://www.modelscope.cn/iic/speech_charctc_kws_phone-xiaoyun.git
 
 ### 如何使用
 
-#### 环境依赖
-
-funasr>=1.1.7
-
 #### 基于ModelScope推理代码范例
-
 
 ```python
 from modelscope.pipelines import pipeline
@@ -98,7 +88,7 @@ from modelscope.utils.constant import Tasks
 
 kwsbp_16k_pipline = pipeline(
     task=Tasks.keyword_spotting,
-    model='damo/speech_charctc_kws_phone-xiaoyun')
+    model='iic/speech_charctc_kws_phone-xiaoyun')
 
 kws_result = kwsbp_16k_pipline(audio_in='https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/KWS/pos_testset/kws_xiaoyunxiaoyun.wav')
 print(kws_result)
@@ -113,6 +103,9 @@ audio_in参数说明：
 
 
 #### 基于FunASR推理代码范例
+##### 环境依赖
+
+funasr>=1.1.7
 
 ```python
 from funasr import AutoModel
@@ -316,6 +309,7 @@ training_xiaoyunxiaoyun
 ## 模型训练流程
 
 - 模型训练采用"basetrain + finetune"的模式，finetune过程使用目标场景的特定唤醒词数据并混合一定比例的ASR数据。如训练数据与应用场景不匹配，应当针对性做数据模拟。
+- 本模型同时支持FunASR和ModelScope进行finetune。
 
 
 ### 预处理
@@ -325,8 +319,8 @@ training_xiaoyunxiaoyun
 
 ## 数据评估及结果
 
-- 模型在自建9个场景各50句的正样本集（共450条）测试，唤醒率为93.11%；  
-在自建的移动端负样本集上测试，误唤醒为40小时0次。
+- 模型在自建9个场景各50句的正样本集（共450条）测试，唤醒率为93.11%。
+- 在自建的移动端负样本集上测试，误唤醒为40小时0次。
 
 ## 相关论文以及引用信息
 
