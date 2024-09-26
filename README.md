@@ -51,6 +51,11 @@ widgets:
 ## Highlight
 - 本文档适配modelscope-1.5.0至当前最新版本，其他版本请阅读对应README。
 
+## Git模型下载
+```
+git clone https://www.modelscope.cn/iic/speech_charctc_kws_phone-xiaoyun.git
+```
+
 ## 模型描述
 
 &emsp;&emsp;移动端语音唤醒模型，检测关键词为“小云小云”。  
